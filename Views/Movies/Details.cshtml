@@ -1,0 +1,53 @@
+﻿@model Course.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Movie</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenreId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Model.ReleaseDate.ToLongDateString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+
+        <dd>
+            @Model.DateAdded.ToLongDateString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberInStock)
+        </dd>
+
+    </dl>
+</div>

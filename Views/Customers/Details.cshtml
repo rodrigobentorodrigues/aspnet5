@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details of Customer</h2>
 
 <div>
-    <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,21 +18,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsSubscribedToNewsletter)
+            MembershipType Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsSubscribedToNewsletter)
+            @Html.DisplayFor(model => model.MembershipType.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MembershipTypeId)
-        </dt>
+        @if (Model.Birthdate.HasValue)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Birthdate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MembershipTypeId)
-        </dd>
-
+            <dd>
+                @Html.DisplayFor(model => model.Birthdate)
+            </dd>
+        }
     </dl>
 </div>
 <p>
