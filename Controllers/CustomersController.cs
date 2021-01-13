@@ -1,4 +1,6 @@
 ﻿using Course.Data;
+using Course.Models;
+using Course.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -35,6 +37,48 @@ namespace Course.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+        public ActionResult Create()
+        {
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                MembershipTypes = membershipTypes,
+                Types = new SelectList(membershipTypes, "Id", "Name")
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            } else
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.Include((c) => c.MembershipType).SingleOrDefault((c) => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Customer customer)
+        {
+            return View();
         }
 
     }
