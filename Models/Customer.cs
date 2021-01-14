@@ -15,6 +15,7 @@ namespace Course.Models
         public bool IsSubscribedToNewsletter { get; set; }
 
         [Display(Name = "Date of Birth:")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Birthdate { get; set; }
 
         [Display(Name = "Membership Type:")]

@@ -51,6 +51,7 @@ namespace Course.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Customer customer)
         {
             if (ModelState.IsValid)
@@ -72,13 +73,34 @@ namespace Course.Controllers
             if (customer == null)
                 return HttpNotFound();
 
-            return View(customer);
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new EditCostumerViewModel
+            {
+                Customer = customer,
+                MembershipTypes = membershipTypes,
+                Types = new SelectList(membershipTypes, "Id", "Name")
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Customer customer)
         {
-            return View();
+            var customerInDb = _context.Customers.SingleOrDefault((c) => c.Id == customer.Id);
+
+            if (customerInDb == null)
+                return HttpNotFound();
+
+            customerInDb.Name = customer.Name;
+            customerInDb.Birthdate = customer.Birthdate;
+            customerInDb.MembershipTypeId = customer.MembershipTypeId;
+            customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }

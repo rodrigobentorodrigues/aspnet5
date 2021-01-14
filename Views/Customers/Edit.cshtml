@@ -1,7 +1,35 @@
-﻿
+﻿@model Course.ViewModels.EditCostumerViewModel
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Customer";
 }
 
-<h2>Edit</h2>
+@using (Html.BeginForm("Edit", "Customers"))
+{
+    
+    @Html.HiddenFor((viewModel) => viewModel.Customer.Id)
 
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Customer.Name)
+        @Html.TextBoxFor((viewModel) => viewModel.Customer.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Customer.Birthdate)
+        @Html.TextBoxFor((viewModel) => viewModel.Customer.Birthdate, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Customer.MembershipTypeId)
+        @Html.DropDownListFor((viewModel) => viewModel.Customer.MembershipTypeId,
+            Model.Types, "Select Membership Type", new { @class = "form-control" })
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor((viewModel) => viewModel.Customer.IsSubscribedToNewsletter) Subscribed to Newsletter
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Edit</button>
+}
