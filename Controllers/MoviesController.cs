@@ -76,5 +76,43 @@ namespace Course.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault((m) => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var genres = _context.Genres.ToList();
+            var viewModel = new EditMovieViewModel
+            {
+                Genres = new SelectList(genres, "Id", "Name"),
+                Movie = movie
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Movie movie)
+        {
+            var movieInDb = _context.Movies.SingleOrDefault((m) => m.Id == movie.Id);
+
+            if (movieInDb == null)
+                return HttpNotFound();
+
+            movieInDb.Name = movie.Name;
+            movieInDb.ReleaseDate = movie.ReleaseDate;
+            movieInDb.NumberInStock = movie.NumberInStock;
+            movieInDb.GenreId = movie.GenreId;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
+
     }
 }

@@ -1,0 +1,33 @@
+﻿@model Course.ViewModels.EditMovieViewModel
+
+@{
+    ViewBag.Title = "Edit Movie";
+}
+
+@using (Html.BeginForm("Edit", "Movies"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor((viewModel) => viewModel.Movie.Id)
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Movie.Name)
+        @Html.TextBoxFor((viewModel) => viewModel.Movie.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Movie.ReleaseDate)
+        @Html.TextBoxFor((viewModel) => viewModel.Movie.ReleaseDate, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Movie.NumberInStock)
+        @Html.TextBoxFor((viewModel) => viewModel.Movie.NumberInStock, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor((viewModel) => viewModel.Movie.GenreId)
+        @Html.DropDownListFor((viewModel) => viewModel.Movie.GenreId, Model.Genres,
+            "Select a Genre", new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Edit</button>
+}
