@@ -6,7 +6,7 @@
 
 @using (Html.BeginForm("Edit", "Customers"))
 {
-    
+    @Html.AntiForgeryToken()
     @Html.HiddenFor((viewModel) => viewModel.Customer.Id)
 
     <div class="form-group">

@@ -1,6 +1,7 @@
 ﻿using Course.Data;
 using Course.Models;
 using Course.ViewModels;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -47,6 +48,32 @@ namespace Course.Controllers
 
 
             return View(movie);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var genres = _context.Genres.ToList();
+            var viewModel = new NewMovieViewModel
+            {
+                Genres = new SelectList(genres, "Id", "Name"),
+                Movie = new Movie()
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Movie movie)
+        {
+            movie.DateAdded = DateTime.Now;
+            movie.Genre = _context.Genres.Single((g) => g.Id == movie.GenreId);
+
+            _context.Movies.Add(movie);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
     }

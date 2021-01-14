@@ -6,6 +6,7 @@
 
 @using (Html.BeginForm("Create", "Customers"))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor((viewModel) => viewModel.Customer.Name)
         @Html.TextBoxFor((viewModel) => viewModel.Customer.Name, new { @class = "form-control" })
@@ -25,7 +26,7 @@
     <div class="form-group">
         @Html.LabelFor((viewModel) => viewModel.Customer.MembershipTypeId)
         @Html.DropDownListFor((viewModel) => viewModel.Customer.MembershipTypeId,
-            Model.Types, "Select Membership Type", new { @class = "form-control"})
+            Model.Types, "Select Membership Type", new { @class = "form-control" })
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>

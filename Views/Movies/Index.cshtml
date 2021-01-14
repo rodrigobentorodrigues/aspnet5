@@ -6,6 +6,11 @@
 
 <h2>Movies</h2>
 
+
+@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+
+<hr />
+
 @if (!Model.Any())
 {
     <h4>Nothing movies added!</h4>

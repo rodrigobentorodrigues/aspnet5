@@ -58,6 +58,7 @@ namespace Course.Controllers
             {
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
+
                 return RedirectToAction("Index");
             } else
             {
