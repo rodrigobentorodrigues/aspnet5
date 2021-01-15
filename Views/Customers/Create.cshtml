@@ -6,15 +6,18 @@
 
 @using (Html.BeginForm("Create", "Customers"))
 {
+    @Html.ValidationSummary(true, "Please fix the following errors.")
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor((viewModel) => viewModel.Customer.Name)
         @Html.TextBoxFor((viewModel) => viewModel.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor((viewModel) => viewModel.Customer.Name)
     </div>
 
     <div class="form-group">
         @Html.LabelFor((viewModel) => viewModel.Customer.Birthdate)
         @Html.TextBoxFor((viewModel) => viewModel.Customer.Birthdate, new { @class = "form-control" })
+        @Html.ValidationMessageFor((viewModel) => viewModel.Customer.Birthdate)
     </div>
 
     <div class="checkbox">
@@ -27,7 +30,12 @@
         @Html.LabelFor((viewModel) => viewModel.Customer.MembershipTypeId)
         @Html.DropDownListFor((viewModel) => viewModel.Customer.MembershipTypeId,
             Model.Types, "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor((viewModel) => viewModel.Customer.MembershipTypeId)
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")    
 }

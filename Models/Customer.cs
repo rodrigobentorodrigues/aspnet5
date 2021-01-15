@@ -7,7 +7,7 @@ namespace Course.Models
     {
 
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please inform one name valid")]
         [StringLength(255)]
         [Display(Name = "Name:")]
         public string Name { get; set; }
@@ -16,6 +16,7 @@ namespace Course.Models
 
         [Display(Name = "Date of Birth:")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
         [Display(Name = "Membership Type:")]

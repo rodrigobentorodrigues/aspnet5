@@ -68,7 +68,6 @@ namespace Course.Controllers
         public ActionResult Create(Movie movie)
         {
             movie.DateAdded = DateTime.Now;
-            movie.Genre = _context.Genres.Single((g) => g.Id == movie.GenreId);
 
             _context.Movies.Add(movie);
             _context.SaveChanges();

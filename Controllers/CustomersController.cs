@@ -45,7 +45,8 @@ namespace Course.Controllers
             var viewModel = new NewCustomerViewModel
             {
                 MembershipTypes = membershipTypes,
-                Types = new SelectList(membershipTypes, "Id", "Name")
+                Types = new SelectList(membershipTypes, "Id", "Name"),
+                Customer = new Customer()
             };
             return View(viewModel);
         }
@@ -62,7 +63,14 @@ namespace Course.Controllers
                 return RedirectToAction("Index");
             } else
             {
-                return View();
+                var membershipTypes = _context.MembershipTypes.ToList();
+                var viewModel = new NewCustomerViewModel
+                {
+                    MembershipTypes = membershipTypes,
+                    Types = new SelectList(membershipTypes, "Id", "Name"),
+                    Customer = customer
+                };
+                return View(viewModel);
             }
         }
 
