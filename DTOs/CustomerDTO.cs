@@ -13,7 +13,6 @@ namespace Course.DTOs
 
         public bool IsSubscribedToNewsletter { get; set; }
 
-        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
         public byte MembershipTypeId { get; set; }
