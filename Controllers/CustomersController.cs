@@ -24,9 +24,8 @@ namespace Course.Controllers
 
         // GET: Customers
         public ActionResult Index()
-        {
-            var customers = _context.Customers.Include((customer) => customer.MembershipType).ToList();
-            return View(customers);
+        { 
+            return View();
         }
 
         public ActionResult Details(int id)

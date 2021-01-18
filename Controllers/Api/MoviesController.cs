@@ -3,6 +3,7 @@ using Course.Data;
 using Course.DTOs;
 using Course.Models;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -25,12 +26,14 @@ namespace Course.Controllers.Api
 
         public IHttpActionResult GetMovies()
         {
-            return Ok(_context.Movies.ToList().Select(Mapper.Map<Movie, MovieDTO>));
+            return Ok(_context.Movies.Include((movie) => movie.Genre)
+                .ToList().Select(Mapper.Map<Movie, MovieDTO>));
         }
 
         public IHttpActionResult GetMovie(int id)
         {
-            var movie = _context.Movies.SingleOrDefault((mov) => mov.Id == id);
+            var movie = _context.Movies.Include((m) => m.Genre).
+                SingleOrDefault((mov) => mov.Id == id);
 
             if (movie == null)
                 return NotFound();

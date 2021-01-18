@@ -3,9 +3,8 @@ using Course.Data;
 using Course.DTOs;
 using Course.Models;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 
 namespace Course.Controllers.Api
@@ -27,12 +26,14 @@ namespace Course.Controllers.Api
 
         public IHttpActionResult GetCustomers()
         {
-            return Ok(_context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDTO>));
+            return Ok(_context.Customers.Include((customer) => customer.MembershipType).
+                ToList().Select(Mapper.Map<Customer, CustomerDTO>));
         }
 
         public IHttpActionResult GetCustomer(int id)
         {
-            var customer = _context.Customers.SingleOrDefault((c) => c.Id == id);
+            var customer = _context.Customers.Include((c) => c.MembershipType).
+                SingleOrDefault((c) => c.Id == id);
 
             if (customer == null)
                 return NotFound();

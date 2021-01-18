@@ -34,8 +34,7 @@ namespace Course.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var movies = _context.Movies.Include((movie) => movie.Genre).ToList();
-            return View(movies);
+            return View();
         }
 
         [HttpGet]

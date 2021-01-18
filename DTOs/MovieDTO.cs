@@ -13,6 +13,7 @@ namespace Course.DTOs
 
         [Required(ErrorMessage = "The Genre field is required")]
         public int GenreId { get; set; }
+        public GenreDTO Genre { get; set; }
 
         [Required]
         public DateTime ReleaseDate { get; set; }

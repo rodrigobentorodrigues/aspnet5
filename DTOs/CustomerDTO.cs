@@ -1,5 +1,4 @@
-﻿using Course.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Course.DTOs
@@ -16,5 +15,7 @@ namespace Course.DTOs
         public DateTime? Birthdate { get; set; }
 
         public byte MembershipTypeId { get; set; }
+
+        public MembershipTypeDTO MembershipType { get; set; }
     }
 }

@@ -9,11 +9,14 @@ namespace Course.App_Start
 
         public MappingProfile()
         {
-            CreateMap<Customer, CustomerDTO>().ForMember((cust) => cust.Id,  (opt) => opt.Ignore());
-            CreateMap<CustomerDTO, Customer>();
+            CreateMap<Customer, CustomerDTO>();
+            CreateMap<CustomerDTO, Customer>().ForMember((cust) => cust.Id, (opt) => opt.Ignore());
             //
-            CreateMap<Movie, MovieDTO>().ForMember((mov) => mov.Id, (opt) => opt.Ignore());
-            CreateMap<MovieDTO, Movie>();
+            CreateMap<Movie, MovieDTO>();
+            CreateMap<MovieDTO, Movie>().ForMember((mov) => mov.Id, (opt) => opt.Ignore());
+
+            CreateMap<MembershipType, MembershipTypeDTO>();
+            CreateMap<Genre, GenreDTO>();
         }
 
     }
