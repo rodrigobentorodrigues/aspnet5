@@ -247,6 +247,10 @@
     <Compile Include="Migrations\202101201418380_InsertIdentity.designer.cs">
       <DependentUpon>202101201418380_InsertIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101212352143_SeedUsers.cs" />
+    <Compile Include="Migrations\202101212352143_SeedUsers.designer.cs">
+      <DependentUpon>202101212352143_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -619,6 +623,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202101201418380_InsertIdentity.resx">
       <DependentUpon>202101201418380_InsertIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202101212352143_SeedUsers.resx">
+      <DependentUpon>202101212352143_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
