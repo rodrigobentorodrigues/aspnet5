@@ -34,7 +34,8 @@ namespace Course.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole(RoleName.CanManagerMovies)) return View();
+            return View("ReadOnly");
         }
 
         [HttpGet]
@@ -50,6 +51,7 @@ namespace Course.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = RoleName.CanManagerMovies)]
         public ActionResult Create()
         {
             var genres = _context.Genres.ToList();
