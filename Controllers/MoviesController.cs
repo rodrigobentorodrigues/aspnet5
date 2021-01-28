@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Course.Controllers
 {
+    [Authorize(Roles = RoleName.CanManagerMovies)]
     public class MoviesController : Controller
     {
 
@@ -32,6 +33,7 @@ namespace Course.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             if (User.IsInRole(RoleName.CanManagerMovies)) return View();
@@ -50,8 +52,7 @@ namespace Course.Controllers
             return View(movie);
         }
 
-        [HttpGet]
-        [Authorize(Roles = RoleName.CanManagerMovies)]
+        [HttpGet]        
         public ActionResult Create()
         {
             var genres = _context.Genres.ToList();

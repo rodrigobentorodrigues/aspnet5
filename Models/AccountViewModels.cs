@@ -12,6 +12,11 @@ namespace Course.Models
         [Required]
         [Display(Name = "Driving License")]
         public string DrivingLicense { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Phone Number:")]
+        public string Phone { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -87,6 +92,11 @@ namespace Course.Models
         [Display(Name = "Confirmar Senha")]
         [Compare("Password", ErrorMessage = "A senha e a senha de confirmação não correspondem.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Phone Number:")]
+        public string Phone { get; set; }
     }
 
     public class ResetPasswordViewModel
