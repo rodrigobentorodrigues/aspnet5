@@ -5,6 +5,8 @@ namespace Course.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        
+        [OutputCache(Duration = 50)]
         public ActionResult Index()
         {
             return View();
