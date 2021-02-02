@@ -11,9 +11,9 @@ namespace Course.Controllers.Api
 
         private readonly ApplicationDbContext _context;
 
-        public RentalsController(ApplicationDbContext context)
+        public RentalsController()
         {
-            this._context = context;
+            this._context = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
@@ -23,7 +23,7 @@ namespace Course.Controllers.Api
 
 
         [HttpPost]
-        public IHttpActionResult CreateNew(NewRentalDTO newRental)
+        public IHttpActionResult Create(NewRentalDTO newRental)
         {
             //if (newRental.MoviesId.Count == 0)
             //    return BadRequest("No Movie Ids have been given.");

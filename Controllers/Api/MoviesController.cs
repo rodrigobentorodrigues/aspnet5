@@ -12,11 +12,11 @@ namespace Course.Controllers.Api
     public class MoviesController : ApiController
     {
 
-        private readonly ApplicationContext _context;
+        private readonly ApplicationDbContext _context;
 
         public MoviesController()
         {
-            this._context = new ApplicationContext();
+            this._context = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
@@ -24,10 +24,17 @@ namespace Course.Controllers.Api
             this._context.Dispose();
         }
 
-        public IHttpActionResult GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            return Ok(_context.Movies.Include((movie) => movie.Genre)
-                .ToList().Select(Mapper.Map<Movie, MovieDTO>));
+            var moviesQuery = _context.Movies.Include((movie) => movie.Genre);
+
+            if (!string.IsNullOrEmpty(query))
+                moviesQuery.Where((movie) => movie.Name.ToUpper().Contains(query.ToUpper()));
+
+            var moviesDTO = moviesQuery
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDTO>);
+            return Ok(moviesDTO);
         }
 
         public IHttpActionResult GetMovie(int id)

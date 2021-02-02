@@ -12,11 +12,11 @@ namespace Course.Controllers.Api
     public class CustomersController : ApiController
     {
 
-        private readonly ApplicationContext _context;
+        private readonly ApplicationDbContext _context;
 
         public CustomersController()
         {
-            this._context = new ApplicationContext();
+            this._context = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
@@ -24,10 +24,18 @@ namespace Course.Controllers.Api
             this._context.Dispose();
         }
 
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            return Ok(_context.Customers.Include((customer) => customer.MembershipType).
-                ToList().Select(Mapper.Map<Customer, CustomerDTO>));
+            var customersQuery = _context.Customers.Include((customer) => customer.MembershipType);
+
+            if (!string.IsNullOrEmpty(query))
+                customersQuery = customersQuery.Where((customer) 
+                    => customer.Name.ToUpper().Contains(query.ToUpper()));
+
+            var customersDTO = customersQuery.
+                ToList().
+                Select(Mapper.Map<Customer, CustomerDTO>);
+            return Ok(customersDTO);
         }
 
         public IHttpActionResult GetCustomer(int id)

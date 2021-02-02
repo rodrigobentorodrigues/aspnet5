@@ -10,11 +10,11 @@ namespace Course.Controllers
     public class CustomersController : Controller
     {
 
-        private readonly ApplicationContext _context;
+        private readonly ApplicationDbContext _context;
 
         public CustomersController()
         {
-            this._context = new ApplicationContext();
+            this._context = new ApplicationDbContext();
         }
 
         protected override void Dispose(bool disposing)
